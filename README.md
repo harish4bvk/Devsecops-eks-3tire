@@ -120,7 +120,7 @@ Client → Ingress → Frontend → Backend → RDS (PostgreSQL)
 
 ```bash
 git clone https://github.com/harish4bvk/Devsecops-eks-3tire.git
-cd <your-repo-name>
+cd Devsecops-eks-3tire
 ```
 
 ### 2️⃣ Provision infrastructure
