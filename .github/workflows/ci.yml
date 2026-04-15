@@ -13,7 +13,9 @@ on:
 
 env:
   AWS_REGION: ap-south-1
-  ECR_REPO: <your-ecr-repo>
+  ECR_REPOSITORY_BACKEND: backend
+  ECR_REPOSITORY_FRONTEND: frontend
+  CLUSTER_NAME: devsecops-cluster
 
 jobs:
   ci:
@@ -81,7 +83,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region: ap-south-1
 
       # -------------------------
       # Login to ECR
@@ -94,9 +96,13 @@ jobs:
       # -------------------------
       # Docker Build
       # -------------------------
-      - name: Build Docker Image
+      - name: Build Docker Backend
         run: |
-          docker build -t $ECR_REPO:${{ github.sha }} .
+          docker build -t backend:${{ github.sha }} ./backend
+
+      - name: Build Docker Frontend
+        run: |
+          docker build -t frontend:${{ github.sha }} ./frontend
 
       # -------------------------
       # Trivy Scan (FAIL if vuln)
