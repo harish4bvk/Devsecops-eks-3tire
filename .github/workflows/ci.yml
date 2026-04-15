@@ -29,13 +29,13 @@ jobs:
       # Build
       # -------------------------
       - name: Build frontend
-        working-directory: frontend
+        working-directory: ./app/frontend
         run: |
-          npm install
-          npm run build
-      
+         npm install
+         npm run build
+
       - name: Build backend
-        working-directory: backend
+        working-directory: ./app/backend
         run: |
           npm install
           npm run build
