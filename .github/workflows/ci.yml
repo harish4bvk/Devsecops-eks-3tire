@@ -36,10 +36,13 @@ jobs:
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
             -Dsonar.qualitygate.wait=true
 
-  #blackduck:
-  #  runs-on: ubuntu-latest
-  #  needs: build-test
-  #  steps:
+  blackduck:
+    runs-on: ubuntu-latest
+    needs: build-test
+    steps:
+      - name: Run npm audit
+        working-directory: ./app
+        run: npm audit
   #    - uses: actions/checkout@v4
   #    - name: Black Duck Scan
   #      uses: synopsys-sig/github-action@v1
